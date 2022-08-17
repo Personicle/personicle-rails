@@ -1,0 +1,2 @@
+module PollutionHelper
+end

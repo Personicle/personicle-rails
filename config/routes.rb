@@ -43,8 +43,13 @@ Rails.application.routes.draw do
   get  'image/upload', :to => 'image#upload'
   post 'image/send_packet', :to => 'image#send_packet', :as => 'send_packet'
   post 'pages/dashboard/delete-event', :to => 'dashboard#delete_event', :as => 'delete_user_events'
+
   get 'pages/exposome', :to => 'exposome#index'
   post 'pages/exposome', :to => 'exposome#index'
+
+  get 'pages/pollution', :to => 'pollution#index'
+  post 'pages/pollution', :to => 'pollution#index'
+  get 'pages/pollution/get_exposome_data', :to => 'pollution#get_exposome_data', :as => 'get_exposome_data'
   
   get 'pages/user/create_question', :to => 'create_user_questions#index'
   post 'pages/user/create_question', :to => 'create_user_questions#create'

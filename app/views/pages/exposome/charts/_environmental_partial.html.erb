@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-header bg-transparent">
+    <div class="row align-items-center">
+      <div class="col">
+        
+        <h5 class="h3 text-black mb-0">Temperature</h5>
+         <%= form_with url: pages_pollution_path, local: true, method: :post do  %>
+          <input type="hidden" name="refresh" value="hard_refresh">
+          <button  class="btn btn-primary" style="float: right;" type="submit">Refresh</button>
+        <% end %>
+      </div>
+      
+    </div>
+  </div>
+  <div class="card-body">
+    <!-- Chart -->
+    <div class="chart">
+      <% if user_data.length() != 0 %>
+          <%= line_chart [
+                {
+                  name: exposome_type, type: "line", data: user_data 
+                } 
+          ],points:false, round: 2, loading: "Loading...", xtitle: "Date", ytitle: exposome_type %>
+      <%else%>
+        <h3 style="color:black;">No temperature events for the past 3 months</h3>
+      <%end%>
+    </div>
+  </div>
+</div>

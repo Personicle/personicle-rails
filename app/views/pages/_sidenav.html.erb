@@ -56,6 +56,13 @@
               <span class="nav-link-text ml-1"> Exposome</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link <%= action_name.eql?('tables') ? 'active': '' %>" href="<%= pages_pollution_path %>">
+              <% #<i class="ni ni-bullet-list-67 text-default"></i> %>
+              <span class="iconify mr-1" data-icon="iconoir:oil-industry" data-width="24" data-height="24"></span>
+              <span class="nav-link-text ml-1"> Pollution</span>
+            </a>
+          </li>
           <% if !session[:oktastate]["physician"]%>
            <li class="nav-item">
             <a class="nav-link <%= action_name.eql?('tables') ? 'active': '' %>" href="<%= pages_dashboard_physician_questions_path %>">

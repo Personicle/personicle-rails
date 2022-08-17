@@ -1,0 +1,52 @@
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <%= render partial: 'pages/header', locals: {
+            icon: 'home',
+            breadcrumb_1: 'Logging',
+            breadcrumb_2: 'Logging'
+      } %>
+    </div>
+  </div>
+</div>
+
+
+<!-- Page content -->
+<div class="container-fluid mt--6">
+ 
+<!-- Page content -->
+
+  <div class="table-responsive">
+    <div class="container">
+        
+        <div class="testbox">
+
+            <%= form_with url: get_exposome_data_path, local: true, method: :get do  %>
+                <h1>Exposome Charts</h1>
+                <h4>Choose an exposome Stream<span>*</span></h4>
+            
+                <%= select_tag "exposomeType",options_for_select(@exposome_streams), prompt: 'Choose one...',:required => true %>
+                
+            
+                <div class="btn-block">
+                <button type="submit" >Submit</button>
+                </div>
+        
+            <% end %>
+        </div>
+        <div>
+            <% if local_assigns.has_key? :status_msg %>
+                <p style="color:white;font-weight:bold;"><%= status_msg %></p>
+            <% end %>
+            <% if local_assigns.has_key? :exposome_data %>
+                <%=render 'pages/exposome/charts/environmental_partial', user_data: local_assigns[:exposome_data].map { |record|
+                    [record.timestamp, record.value]
+                    }, exposome_type: local_assigns[:exposome_type] %>
+            <% end%>
+        </div>
+    </div>
+  </div>
+  <%= render 'pages/footer' %>
+</div>
+
+
