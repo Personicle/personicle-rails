@@ -1,6 +1,6 @@
 class FetchData
 
-    def self.get_events(ses=session,event=event_type,start_time=st,end_time=et,is_hard_refresh=hard_refresh, user_id=uid)
+    def self.get_events(ses=session,event=event_type,start_time=st,end_time=et,is_hard_refresh=hard_refresh, user_id)
        
         url = ENV['EVENTS_ENDPOINT']+"?startTime="+start_time+"&endTime="+end_time+"&user_id="+user_id
         
@@ -36,7 +36,7 @@ class FetchData
         end
     end
 
-    def self.get_datastreams(ses=session,data_source=source, datatype=data_type,start_date=st, end_date=et, is_hard_refresh=hard_refresh, user_id = uid)
+    def self.get_datastreams(ses=session,data_source=source, datatype=data_type,start_date=st, end_date=et, is_hard_refresh=hard_refresh, user_id=uid)
         if data_source.nil?
             
             url = ENV['DATASTREAMS_ENDPOINT']+"?startTime="+start_date+"&endTime="+end_date+"&datatype="+datatype+"&user_id="+user_id
