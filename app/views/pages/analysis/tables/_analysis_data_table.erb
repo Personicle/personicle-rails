@@ -1,16 +1,17 @@
  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
 
- <%= form_with url: select_user_events_path, local: true, method: :post do |form| %>
-  <input type="hidden" id="selected_event" name="selected_event" value="[]"/>
+ <%= form_with url: delete_user_analysis_path, local: true, method: :post do |form| %>
+  <input type="hidden" id="selected_analysis" name="selected_analysis" value="[]"/>
   <div class="card">
   <div class="card-header border-0">
     <div class="row align-items-center">
       <div class="col">
-        <h3 class="mb-0">User Events</h3>
+        <h3 class="mb-0">User Analysis</h3>
       </div>
       <div class="col text-right">
-        <button type="submit" class="btn btn-sm btn-primary" formaction='/pages/analysis/select-event' name="select_event">Update with Selected Chart</button>
+        <button type="submit" class="btn btn-sm btn-primary" formaction='/pages/analysis/select-analysis' name="select_analysis">Update with Selected Chart</button>
+        <button type="submit" class="btn btn-sm btn-primary" name="delete_analysis">Delete Selected </button>      
       </div>
     </div>
   </div>
@@ -98,43 +99,37 @@
 function printStatement(event) {
 console.log(document.getElementById(event.id));
 }
-// function addEvent(event) {
 
-//   // Reference the CheckBoxes in Table.
-//   var grid = document.getElementById("analysis-table");
-    
-//   // Reference the CheckBoxes in Table.
-//   var checkBoxes = grid.getElementsByTagName("INPUT");
+/// Disable Update Selected and Delete Buttons when radio button not selected
 
-//   // alert(document.getElementById(event.id.replace("row-check-","")));
-//   let unique_analysis_id = event.id; // 1. CHANGE TO UNIQUE ANALYSIS ID
-//   console.log(unique_analysis_id);
-//   let hidden_field = document.getElementById("selected_event");
-//   console.log(hidden_field);
-//   let selected_event = document.getElementById("selected_event");
-//   console.log(selected_event);
-//   var jsonObj = JSON.parse(hidden_field.value);
-//   var selected_event_id= JSON.parse(selected_event.value);
+// Get all the radio buttons
+var radios = document.querySelectorAll('input[type=radio]');
+// Get only the checked radio button
+var checked = document.querySelectorAll('input[type=radio]:checked');
+// Get all the submit buttons
+var buttons = document.querySelectorAll('button[type="submit"]');
+// Check the the array of buttons and the length of the array
+// console.log(buttons)
+// console.log(buttons.length)
 
-//         if (event.checked) {
-//           addedEvent = {  
-//                       "antecedent_name": document.getElementById("antecedent_name-"+unique_analysis_id.replace("row-check-","")).textContent.trim(),
-//                       "antecedent_parameter": document.getElementById("antecedent_parameter-"+unique_analysis_id.replace("row-check-","")).textContent.trim(),
-//                       "query_interval": document.getElementById("query_interval-"+unique_analysis_id.replace("row-check-","")).textContent.trim(),
-//                       "consequent_name": document.getElementById("consequent_name-"+unique_analysis_id.replace("row-check-","")).textContent.trim(),
-//                       "consequent_parameter": document.getElementById("consequent_parameter-"+unique_analysis_id.replace("row-check-","")).textContent.trim() 
-//                       }
-//           jsonObj.push(addedEvent);
+// Loop through each button in the array and disable each button on page load by checking the length
+buttons.forEach(function (button, i) {
+if(!checked.length){
+  button.setAttribute("disabled", "disabled");
+}
 
-//           selected_event_id.push(unique_analysis_id.replace("row-check-",""));
-          
-//           }
-//   console.log(jsonObj);
-//   hidden_field.value = JSON.stringify(jsonObj);
-//   console.log(hidden_field.value);
-//   selected_event.value = JSON.stringify(selected_event_id);
-//   console.log(selected_event.value);
-// }
+// Attach the event handler to all the radio buttons with forEach and addEventListener
+// If radio button checked, enable button again (remove disabled attribute)
+radios.forEach(function(el){
+  el.addEventListener('click', function(){
+    checked = document.querySelectorAll('input[type=radio]:checked');
+    if(checked.length){
+      // Enable the button by removing the attribute
+      button.removeAttribute("disabled");
+    }
+  });
+});
+});
 
 
 </script>

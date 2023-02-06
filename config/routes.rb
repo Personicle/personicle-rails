@@ -63,6 +63,7 @@ Rails.application.routes.draw do
   get 'pages/analysis/new_analysis', :to => 'analysis#add_analysis'
   post 'pages/analysis/new_analysis', :to => 'analysis#add_analysis', :as => 'add_analysis'
 
-  post 'pages/analysis/select-event', :to => 'analysis#select_event', :as => 'select_user_events'
+  post 'pages/analysis/select-analysis', :to => 'analysis#select_analysis', :as => 'select_user_analysis'
+  post 'pages/analysis/delete-analysis', :to => 'analysis#delete_analysis', :as => 'delete_user_analysis'
 end
 
